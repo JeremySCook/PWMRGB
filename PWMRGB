@@ -1,0 +1,43 @@
+//takes input from LDR or other analog input
+//turns it into PWM output for LED
+//by Jeremy S. Cook
+
+int redLED = 9; //Sets red output pin
+int greenLED = 10; //Sets green output pin
+int blueLED = 11; //Sets blue output pin
+
+int analogRed; //Analog input red
+int analogGreen; //Analog input green
+int analogBlue; //Analog input blue
+
+int redPWM; //sets PWM value for red
+int greenPWM; //sets PWM value for green
+int bluePWM; //sets PWM value for blue
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // read the input on analog pin 0:
+  int analogRed = analogRead(A0);
+  delay(10);
+  redPWM = map(analogRed, 0, 1023, 0, 255); //maps sensor value into proportional PWM values
+  analogWrite(redLED, redPWM);
+  Serial.print(redPWM); Serial.print("\t");
+    
+  // read the input on analog pin 0:
+  int analogGreen = analogRead(A1);
+  delay(10);
+  greenPWM = map(analogGreen, 0, 1023, 0, 255); //maps sensor value into proportional PWM values
+  analogWrite(greenLED, greenPWM);
+  Serial.print(greenPWM); Serial.print("\t");
+
+  // read the input on analog pin 0:
+  int analogBlue = analogRead(A2);
+  delay(10);
+  bluePWM = map(analogBlue, 0, 1023, 0, 255);
+  analogWrite(blueLED, bluePWM);
+  Serial.println(bluePWM);
+  delay(10);
+}
